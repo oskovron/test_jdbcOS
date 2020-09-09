@@ -1,5 +1,6 @@
 package tests;
 
+import model.RegistrationFailureResponseDTO;
 import model.RegistrationSuccessResponseDTO;
 import io.restassured.RestAssured;
 import io.restassured.response.Response;
@@ -117,6 +118,8 @@ public class RestAssuredPostTestOS extends BaseTest{
     }
 
     //Deserialize json to Class with rest Assured
+    // and
+    //Deserialize JSON Response Body based on Response Status
     @Test
     public void deserializeJsonSuccessRegister() {
         // Tutorial here:
@@ -139,14 +142,24 @@ public class RestAssuredPostTestOS extends BaseTest{
         // Post the request and check the response
         Response response = request.post("/register");
         ResponseBody body = response.getBody();
+        System.out.println(response.getBody().asString());
 
-        // Deserialize the Response body into RegistrationSuccessResponse
-        RegistrationSuccessResponseDTO responseBody = body.as(RegistrationSuccessResponseDTO.class);
+        //Deserialize JSON Response Body based on Response Status
+        if (response.statusCode()==200) {
+            // Deserialize the Response body into RegistrationSuccessResponse
+            RegistrationSuccessResponseDTO responseBody = body.as(RegistrationSuccessResponseDTO.class);
 
-        // Use the RegistrationSuccessResponse class instance to Assert the values of
-        // Response.
-        Assert.assertEquals(4, responseBody.id);
-        Assert.assertEquals("QpwL5tke4Pnpja7X4", responseBody.token);
+            // Use the RegistrationSuccessResponse class instance to Assert the values of
+            // Response.
+            Assert.assertEquals(4, responseBody.id);
+            Assert.assertEquals("QpwL5tke4Pnpja7X4", responseBody.token);
+    }else if (response.statusCode()==400){
+            // Deserialize the Response body into RegistrationSuccessResponse
+            RegistrationFailureResponseDTO responseBody = body.as(RegistrationFailureResponseDTO.class);
+
+            // Use the RegistrationSuccessResponse class instance to Assert the values of
+            // Response.
+            Assert.assertEquals("Missing password", responseBody.error);
+        }
     }
-
 }
