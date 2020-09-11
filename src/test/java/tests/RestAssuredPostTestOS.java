@@ -126,11 +126,12 @@ public class RestAssuredPostTestOS extends BaseTest{
     // and
     //Deserialize JSON Response Body based on Response Status
     @Test
-    public void deserializeJsonSuccessRegister() {
+    public void deserializeJsonDTOSuccessRegister() {
         // Tutorial here:
         // https://www.toolsqa.com/rest-assured/post-request-using-rest-assured/
         RestAssured.baseURI = "https://reqres.in/api";
         RequestSpecification request = RestAssured.given();
+        request.log().all();
 
         // JSONObject is a class that represents a Simple JSON.
         // We can add Key - Value pairs using the put method
@@ -156,15 +157,15 @@ public class RestAssuredPostTestOS extends BaseTest{
 
             // Use the RegistrationSuccessResponse class instance to Assert the values of
             // Response.
-            Assert.assertEquals(4, responseBody.id);
-            Assert.assertEquals("QpwL5tke4Pnpja7X4", responseBody.token);
+            Assert.assertEquals(responseBody.id, 4);
+            Assert.assertEquals( responseBody.token, "QpwL5tke4Pnpja7X4");
     }else if (response.statusCode()==400){
             // Deserialize the Response body into RegistrationSuccessResponse
             RegistrationFailureResponseDTO responseBody = body.as(RegistrationFailureResponseDTO.class);
 
             // Use the RegistrationSuccessResponse class instance to Assert the values of
             // Response.
-            Assert.assertEquals("Missing password", responseBody.error);
+            Assert.assertEquals(responseBody.error, "Missing password");
         }
     }
 }
