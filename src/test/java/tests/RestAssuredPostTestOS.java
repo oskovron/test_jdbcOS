@@ -35,6 +35,11 @@ public class RestAssuredPostTestOS extends BaseTest{
         // Post the request and check the response
         Response response = request.post("/register");
 
+        //get access token
+        String access_token = response.getBody().jsonPath().getString("token");
+        System.out.println("Access token: " + access_token);
+
+
         int statusCode = response.getStatusCode();
         softAssert.assertEquals(statusCode, 200);
         int id = response.getBody().jsonPath().get("id");
