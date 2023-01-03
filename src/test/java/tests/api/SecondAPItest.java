@@ -1,4 +1,4 @@
-package tests;
+package tests.api;
 
 import com.fasterxml.jackson.databind.DeserializationFeature;
 import com.fasterxml.jackson.databind.ObjectMapper;
