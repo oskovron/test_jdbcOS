@@ -35,7 +35,8 @@ public class BaseWebTest {
         //todo: find documentation on how to use specific browser version, not to update my browser all the time
 //        Configuration.browserSize = "1366x768";
 //        open(Properties.GOOGLE_URL);
-        open(PropertiesReader.getProperty(Properties.GOOGLE_URL));
+        String googleURLProperty = PropertiesReader.getProperty(Properties.GOOGLE_URL);
+        open(googleURLProperty);
         WebDriverRunner.driver().getWebDriver().manage().window().maximize();
     }
 
