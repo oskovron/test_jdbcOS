@@ -5,6 +5,7 @@ import org.testng.annotations.BeforeMethod;
 import org.testng.asserts.SoftAssert;
 
 public class BaseTest {
+    //test
     SoftAssert softAssert;
 
     @BeforeMethod
