@@ -7,7 +7,6 @@ import static org.hamcrest.Matchers.*;
 
 
 public class MyTestApi {
-    //revert me too
     String baseURL = "https://reqres.in/api/";
 
     @Test

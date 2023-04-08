@@ -6,7 +6,6 @@ import org.testng.asserts.SoftAssert;
 
 public class BaseTest {
     //test
-    //revert me
     SoftAssert softAssert;
 
     @BeforeMethod
